@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html lang="ko">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>싱가포르 NYP 방한 일정</title>
-<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<title>Singapore NYP Korea Visit Schedule</title>
+<link href="https://fonts.googleapis.com/css2?family=DM+Serif+Display:ital@0;1&family=DM+Sans:wght@300;400;500&display=swap" rel="stylesheet">
 <style>
   :root {
     --cream: #faf6f0;
@@ -25,7 +25,7 @@
   body {
     background: var(--cream);
     color: var(--ink);
-    font-family: 'Noto Sans KR', sans-serif;
+    font-family: 'DM Sans', sans-serif;
     min-height: 100vh;
     overflow-x: hidden;
   }
@@ -100,9 +100,9 @@
   }
 
   header h1 {
-    font-family: 'Noto Serif KR', serif;
-    font-size: clamp(24px, 5vw, 42px);
-    font-weight: 700;
+    font-family: 'DM Serif Display', serif;
+    font-size: clamp(22px, 4.5vw, 38px);
+    font-weight: 400;
     color: var(--brown);
     line-height: 1.2;
     margin-bottom: 8px;
@@ -212,9 +212,9 @@
   }
 
   .day-title {
-    font-family: 'Noto Serif KR', serif;
-    font-size: 15px;
-    font-weight: 600;
+    font-family: 'DM Serif Display', serif;
+    font-size: 16px;
+    font-weight: 400;
     color: var(--brown);
   }
 
@@ -233,21 +233,6 @@
   .badge-travel    { background: #e0f7fa; color: #00838f; }
 
   .schedule-body { padding: 16px 20px 20px; }
-
-  .time-block { margin-bottom: 14px; }
-  .time-block:last-child { margin-bottom: 0; }
-
-  .time-label {
-    display: inline-block;
-    font-size: 10px;
-    font-weight: 500;
-    color: var(--gold);
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    margin-bottom: 4px;
-    border-bottom: 1px solid var(--gold-light);
-    padding-bottom: 1px;
-  }
 
   .items-list { list-style: none; }
 
@@ -282,13 +267,13 @@
     font-size: 12px;
     font-weight: 500;
     color: var(--rust);
-    min-width: 42px;
+    min-width: 70px;
     padding-top: 2px;
   }
 
   .item-text { flex: 1; }
 
-  /* 동적 공지 배너 */
+  /* Dynamic notices */
   .notice-area { margin-top: 10px; }
 
   .notice-pending {
@@ -317,7 +302,7 @@
     border-radius: 0 2px 2px 0;
   }
 
-  /* 매칭 섹션 */
+  /* Matching section */
   .matching-section {
     margin-top: 14px;
     border-top: 1px dashed var(--border);
@@ -364,7 +349,7 @@
   .pair-host { color: var(--rust); font-weight: 500; }
   .pair-note { color: var(--muted); font-size: 11px; }
 
-  /* 일정 메모 */
+  /* Day note */
   .day-note-area { margin-top: 10px; display: none; }
 
   .day-note {
@@ -378,7 +363,7 @@
     line-height: 1.6;
   }
 
-  /* 실시간 연결 상태 */
+  /* Live badge */
   .live-badge {
     position: fixed;
     bottom: 20px;
@@ -442,6 +427,7 @@
     .day-number { min-width: 64px; padding: 14px 14px; }
     .day-number .date { font-size: 26px; }
     .flight-banner { gap: 16px; font-size: 11px; }
+    .lang-toggle { top: 10px; right: 10px; }
   }
 </style>
 </head>
@@ -451,31 +437,31 @@
 
 <header>
   <div class="lang-toggle">
-    <a href="/" class="lang-btn active">한국어</a>
-    <a href="/en.html" class="lang-btn">English</a>
+    <a href="/" class="lang-btn">한국어</a>
+    <a href="/en.html" class="lang-btn active">English</a>
   </div>
   <span class="header-label">Singapore NYP Korea Visit 2026</span>
-  <h1>싱가포르 NYP 방한 일정</h1>
+  <h1>Korea Visit Schedule</h1>
   <p class="header-sub">Nanyang Polytechnic · Korea Campus Mission</p>
   <div class="header-dates">
-    <span>2026년 5월 21일</span>
+    <span>May 21, 2026</span>
     <span class="dot">→</span>
-    <span>2026년 5월 30일</span>
+    <span>May 30, 2026</span>
   </div>
 </header>
 
 <div class="flight-banner">
   <div class="flight-item">
-    <span class="label">✈ 입국</span>
-    <span class="value">TW162 · 06:45 인천 T1</span>
+    <span class="label">✈ Arrival</span>
+    <span class="value">TW162 · 06:45 Incheon T1</span>
   </div>
   <div class="flight-item">
-    <span class="label">픽업</span>
-    <span class="value">서한길, 이목자</span>
+    <span class="label">Pickup</span>
+    <span class="value">Seo Han-gil, Lee Mok-ja</span>
   </div>
   <div class="flight-item">
-    <span class="label">✈ 출국</span>
-    <span class="value">TW161 · 15:50 인천 T1</span>
+    <span class="label">✈ Departure</span>
+    <span class="value">TW161 · 15:50 Incheon T1</span>
   </div>
 </div>
 
@@ -487,29 +473,27 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">21</span>
-        <span class="dow">목요일</span>
+        <span class="dow">THU</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">도착 및 환영</span>
-        <span class="badge badge-arrival">✈ 입국일</span>
+        <span class="day-title">Arrival & Welcome</span>
+        <span class="badge badge-arrival">✈ Arrival Day</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">✈</span><span class="item-time">06:45</span><span class="item-text">인천 1터미널 입국 (TW162)<br><span style="font-size:12px;color:var(--muted)">픽업: 서한길, 이목자</span></span></li>
-        <li><span class="item-icon">🌿</span><span class="item-time">오전</span><span class="item-text">양화진 외국인 선교사 묘원</span></li>
-        <li><span class="item-icon">🍽</span><span class="item-time">점심</span><span class="item-text">점심 식사</span></li>
-        <li><span class="item-icon">🛋</span><span class="item-time">오후</span><span class="item-text">휴식</span></li>
-        <li><span class="item-icon">🍽</span><span class="item-time">저녁</span><span class="item-text">환영 식사 및 오리엔테이션</span></li>
+        <li><span class="item-icon">✈</span><span class="item-time">06:45</span><span class="item-text">Arrive at Incheon Terminal 1 (TW162)<br><span style="font-size:12px;color:var(--muted)">Pickup: Seo Han-gil, Lee Mok-ja</span></span></li>
+        <li><span class="item-icon">🌿</span><span class="item-time">Morning</span><span class="item-text">Yanghwajin Foreign Missionary Cemetery</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">Lunch</span><span class="item-text">Lunch</span></li>
+        <li><span class="item-icon">🛋</span><span class="item-time">Afternoon</span><span class="item-text">Rest</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">Evening</span><span class="item-text">Welcome dinner & orientation</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0521"></div>
       <div class="matching-section" data-match-area="0521">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0521">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0521"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -519,25 +503,23 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">22</span>
-        <span class="dow">금요일</span>
+        <span class="dow">FRI</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">아주대 캠퍼스</span>
+        <span class="day-title">Ajou University</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">🎓</span><span class="item-time">오전~오후</span><span class="item-text">아주대 일정 (캠퍼스 탐방 및 교제)</span></li>
-        <li><span class="item-icon">🍽</span><span class="item-time">저녁</span><span class="item-text">서울 돌아와서 저녁식사 · 교제</span></li>
+        <li><span class="item-icon">🎓</span><span class="item-time">Morning~PM</span><span class="item-text">Ajou University campus visit & fellowship</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">Evening</span><span class="item-text">Dinner in Seoul · Fellowship</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0522"></div>
       <div class="matching-section" data-match-area="0522">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0522">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0522"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -547,26 +529,24 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">23</span>
-        <span class="dow">토요일</span>
+        <span class="dow">SAT</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">직장인 수양회</span>
+        <span class="day-title">Workers' Retreat</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">🏸</span><span class="item-time">오전</span><span class="item-text">배드민턴 교제</span></li>
-        <li><span class="item-icon">🍱</span><span class="item-time">점심</span><span class="item-text">점심 교제</span></li>
-        <li><span class="item-icon">⛺</span><span class="item-time">오후~저녁</span><span class="item-text">불광동 팀비전센터 직장인 수양회</span></li>
+        <li><span class="item-icon">🏸</span><span class="item-time">Morning</span><span class="item-text">Badminton fellowship</span></li>
+        <li><span class="item-icon">🍱</span><span class="item-time">Lunch</span><span class="item-text">Lunch fellowship</span></li>
+        <li><span class="item-icon">⛺</span><span class="item-time">PM~Evening</span><span class="item-text">Workers' Retreat at Bulgwang-dong Team Vision Center</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0523"></div>
       <div class="matching-section" data-match-area="0523">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0523">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0523"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -576,27 +556,25 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">24</span>
-        <span class="dow">주일</span>
+        <span class="dow">SUN</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">주일 모임</span>
-        <span class="badge badge-sunday">주일</span>
+        <span class="day-title">Sunday Meeting</span>
+        <span class="badge badge-sunday">Sunday</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">👥</span><span class="item-time">오전</span><span class="item-text">그룹 교제</span></li>
-        <li><span class="item-icon">⛪</span><span class="item-time">오후</span><span class="item-text">주일 모임</span></li>
-        <li><span class="item-icon">🍱</span><span class="item-time">저녁</span><span class="item-text">생활관 저녁식사</span></li>
+        <li><span class="item-icon">👥</span><span class="item-time">Morning</span><span class="item-text">Group fellowship</span></li>
+        <li><span class="item-icon">⛪</span><span class="item-time">Afternoon</span><span class="item-text">Sunday meeting</span></li>
+        <li><span class="item-icon">🍱</span><span class="item-time">Evening</span><span class="item-text">Dinner at dormitory</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0524"></div>
       <div class="matching-section" data-match-area="0524">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0524">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0524"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -606,28 +584,26 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">25</span>
-        <span class="dow">월요일</span>
+        <span class="dow">MON</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">한국외대 캠퍼스</span>
+        <span class="day-title">HUFS Campus</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">🎓</span><span class="item-time">종일</span><span class="item-text">한국외대 일정</span></li>
+        <li><span class="item-icon">🎓</span><span class="item-time">All day</span><span class="item-text">Hankuk University of Foreign Studies (HUFS) program</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0525"></div>
       <div class="matching-section" data-match-area="0525">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0525">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0525"><div class="day-note"></div></div>
     </div>
   </div>
 
-  <div class="section-divider">광주 사역</div>
+  <div class="section-divider">Gwangju Ministry</div>
 
   <!-- 5/26 -->
   <div class="day-card">
@@ -635,27 +611,25 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">26</span>
-        <span class="dow">화요일</span>
+        <span class="dow">TUE</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">광주 이동 · 사역</span>
+        <span class="day-title">Travel to Gwangju · Ministry</span>
         <span class="badge badge-travel">SRT</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">🚄</span><span class="item-time">08:30</span><span class="item-text">수서역 출발 (SRT 605)<br><span style="font-size:12px;color:var(--muted)">동행 자매: 유헌주</span></span></li>
-        <li><span class="item-icon">📍</span><span class="item-time">10:29</span><span class="item-text">광주송정역 도착</span></li>
-        <li><span class="item-icon">🌏</span><span class="item-time">오후</span><span class="item-text">광주 사역 탐방 및 교제</span></li>
+        <li><span class="item-icon">🚄</span><span class="item-time">08:30</span><span class="item-text">Depart Suseo Station (SRT 605)<br><span style="font-size:12px;color:var(--muted)">Companion: Yoo Heon-joo</span></span></li>
+        <li><span class="item-icon">📍</span><span class="item-time">10:29</span><span class="item-text">Arrive Gwangju Songjeong Station</span></li>
+        <li><span class="item-icon">🌏</span><span class="item-time">Afternoon</span><span class="item-text">Gwangju ministry visit & fellowship</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0526"></div>
       <div class="matching-section" data-match-area="0526">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0526">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0526"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -665,32 +639,30 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">27</span>
-        <span class="dow">수요일</span>
+        <span class="dow">WED</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">서울 귀환 · 수요모임</span>
+        <span class="day-title">Return to Seoul · Wednesday Meeting</span>
         <span class="badge badge-travel">SRT</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">🚄</span><span class="item-time">13:43</span><span class="item-text">광주송정역 출발 (SRT 658)<br><span style="font-size:12px;color:var(--muted)">동행 자매: 유헌주</span></span></li>
-        <li><span class="item-icon">📍</span><span class="item-time">15:40</span><span class="item-text">수서역 도착</span></li>
-        <li><span class="item-icon">🛋</span><span class="item-time">오후</span><span class="item-text">휴식 및 수요모임 준비</span></li>
-        <li><span class="item-icon">⛪</span><span class="item-time">저녁</span><span class="item-text">수요모임 참석</span></li>
+        <li><span class="item-icon">🚄</span><span class="item-time">13:43</span><span class="item-text">Depart Gwangju Songjeong Station (SRT 658)<br><span style="font-size:12px;color:var(--muted)">Companion: Yoo Heon-joo</span></span></li>
+        <li><span class="item-icon">📍</span><span class="item-time">15:40</span><span class="item-text">Arrive Suseo Station</span></li>
+        <li><span class="item-icon">🛋</span><span class="item-time">Afternoon</span><span class="item-text">Rest & Wednesday meeting preparation</span></li>
+        <li><span class="item-icon">⛪</span><span class="item-time">Evening</span><span class="item-text">Wednesday meeting</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0527"></div>
       <div class="matching-section" data-match-area="0527">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0527">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0527"><div class="day-note"></div></div>
     </div>
   </div>
 
-  <div class="section-divider">마지막 일정</div>
+  <div class="section-divider">Final Days</div>
 
   <!-- 5/28 -->
   <div class="day-card">
@@ -698,28 +670,26 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">28</span>
-        <span class="dow">목요일</span>
+        <span class="dow">THU</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">한양대 교제 · 쇼핑</span>
+        <span class="day-title">Hanyang University · Shopping</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">📖</span><span class="item-time">오전</span><span class="item-text">베이직</span></li>
-        <li><span class="item-icon">📢</span><span class="item-time">점심</span><span class="item-text">전도</span></li>
-        <li><span class="item-icon">🍜</span><span class="item-time">점심 후</span><span class="item-text">한양대B 교제</span></li>
-        <li><span class="item-icon">🛍</span><span class="item-time">오후</span><span class="item-text">쇼핑</span></li>
-        <li><span class="item-icon">🏠</span><span class="item-time">저녁</span><span class="item-text">형제: 정환이형 가정 초대 (형제들 4명)<br><span style="font-size:12px;color:var(--muted)">자매: 송현희 자매님 가정 초대 (자매들 3명)</span></span></li>
+        <li><span class="item-icon">📖</span><span class="item-time">Morning</span><span class="item-text">Basic (Bible study)</span></li>
+        <li><span class="item-icon">📢</span><span class="item-time">Lunch</span><span class="item-text">Evangelism</span></li>
+        <li><span class="item-icon">🍜</span><span class="item-time">After lunch</span><span class="item-text">Hanyang University B fellowship</span></li>
+        <li><span class="item-icon">🛍</span><span class="item-time">Afternoon</span><span class="item-text">Shopping</span></li>
+        <li><span class="item-icon">🏠</span><span class="item-time">Evening</span><span class="item-text">Brothers: Home of Jeonghwan (4 brothers)<br><span style="font-size:12px;color:var(--muted)">Sisters: Home of Song Hyeon-hee (3 sisters)</span></span></li>
       </ul>
       <div class="notice-area" data-notice-area="0528"></div>
       <div class="matching-section" data-match-area="0528">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0528">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0528"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -729,28 +699,26 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">29</span>
-        <span class="dow">금요일</span>
+        <span class="dow">FRI</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">전도 · Farewell</span>
-        <span class="badge badge-farewell">마지막 날</span>
+        <span class="day-title">Evangelism · Farewell</span>
+        <span class="badge badge-farewell">Last Day</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">📝</span><span class="item-time">오전</span><span class="item-text">배운 내용 정리</span></li>
-        <li><span class="item-icon">🍱</span><span class="item-time">점심</span><span class="item-text">점심 교제</span></li>
-        <li><span class="item-icon">📢</span><span class="item-time">오후</span><span class="item-text">대학 축제 전도 합류</span></li>
-        <li><span class="item-icon">🎉</span><span class="item-time">저녁</span><span class="item-text">Farewell 모임</span></li>
+        <li><span class="item-icon">📝</span><span class="item-time">Morning</span><span class="item-text">Reflection & review</span></li>
+        <li><span class="item-icon">🍱</span><span class="item-time">Lunch</span><span class="item-text">Lunch fellowship</span></li>
+        <li><span class="item-icon">📢</span><span class="item-time">Afternoon</span><span class="item-text">Join university festival evangelism</span></li>
+        <li><span class="item-icon">🎉</span><span class="item-time">Evening</span><span class="item-text">Farewell gathering</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0529"></div>
       <div class="matching-section" data-match-area="0529">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0529">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0529"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -760,28 +728,26 @@
       <div class="day-number">
         <span class="month">MAY</span>
         <span class="date">30</span>
-        <span class="dow">토요일</span>
+        <span class="dow">SAT</span>
       </div>
       <div class="day-title-area">
-        <span class="day-title">출국</span>
-        <span class="badge badge-departure">✈ 출국일</span>
+        <span class="day-title">Departure</span>
+        <span class="badge badge-departure">✈ Departure Day</span>
       </div>
     </div>
     <div class="schedule-body">
       <ul class="items-list">
-        <li><span class="item-icon">🧳</span><span class="item-time">오전</span><span class="item-text">짐 정리</span></li>
-        <li><span class="item-icon">🍽</span><span class="item-time">11:30</span><span class="item-text">점심 교제 (11:30~12:30)</span></li>
-        <li><span class="item-icon">🚌</span><span class="item-time">12:30</span><span class="item-text">공항 출발</span></li>
-        <li><span class="item-icon">✈</span><span class="item-time">15:50</span><span class="item-text">인천 1터미널 출국 (TW161)</span></li>
+        <li><span class="item-icon">🧳</span><span class="item-time">Morning</span><span class="item-text">Pack up</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">11:30</span><span class="item-text">Farewell lunch (11:30–12:30)</span></li>
+        <li><span class="item-icon">🚌</span><span class="item-time">12:30</span><span class="item-text">Depart for airport</span></li>
+        <li><span class="item-icon">✈</span><span class="item-time">15:50</span><span class="item-text">Depart Incheon Terminal 1 (TW161)</span></li>
       </ul>
       <div class="notice-area" data-notice-area="0530"></div>
       <div class="matching-section" data-match-area="0530">
-        <div class="matching-title">교제 매칭</div>
+        <div class="matching-title">Fellowship Matching</div>
         <div class="matching-list"></div>
       </div>
-      <div class="day-note-area" data-note-area="0530">
-        <div class="day-note"></div>
-      </div>
+      <div class="day-note-area" data-note-area="0530"><div class="day-note"></div></div>
     </div>
   </div>
 
@@ -789,17 +755,28 @@
 
 <footer>
   <div class="prayer">🙏</div>
-  <p>싱가포르 NYP 방한팀과 함께하는 10일간의 여정</p>
+  <p>10 days with the Singapore NYP visiting team</p>
   <p style="margin-top:6px; color: var(--gold);">May 21 – May 30, 2026</p>
 </footer>
 
 <div class="live-badge">
   <div class="live-dot"></div>
-  <span>실시간</span>
+  <span>Live</span>
 </div>
 
 <script src="/socket.io/socket.io.js"></script>
 <script>
+  // English labels for notices (mapped by date_key)
+  const noticeLabels = {
+    '0521': 'Lunch venue to be confirmed',
+    '0522': 'Evening fellowship matching needed',
+    '0523': 'Lunch fellowship connection needed',
+    '0524': 'Singapore testimony speaker to be selected',
+    '0525': 'HUFS pickup person needed',
+    '0527': 'Wednesday meeting testimony speaker to be selected',
+    '0529': 'Lunch campus connection needed',
+  };
+
   const socket = io();
 
   socket.on('data_update', (data) => {
@@ -813,10 +790,11 @@
       const key = el.dataset.noticeArea;
       const items = notices.filter(n => n.date_key === key);
       el.innerHTML = items.map(n => {
+        const label = noticeLabels[n.date_key] || n.label;
         if (n.resolved) {
-          return `<div class="notice-resolved">✅ ${n.label}${n.resolved_text ? ' — ' + n.resolved_text : ''}</div>`;
+          return `<div class="notice-resolved">✅ ${label}${n.resolved_text ? ' — ' + n.resolved_text : ''}</div>`;
         }
-        return `<div class="notice-pending">🔔 ${n.label}</div>`;
+        return `<div class="notice-pending">🔔 ${label}</div>`;
       }).join('');
     });
   }
@@ -834,7 +812,6 @@
 
       section.style.display = 'block';
 
-      // 식사별 그룹핑
       const byMeal = {};
       items.forEach(m => {
         if (!byMeal[m.meal]) byMeal[m.meal] = [];
