@@ -1,0 +1,834 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>싱가포르 NYP 방한 일정</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Serif+KR:wght@300;400;600;700&family=DM+Serif+Display:ital@0;1&family=Noto+Sans+KR:wght@300;400;500&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --cream: #faf6f0;
+    --warm-white: #fff9f2;
+    --ink: #1a1410;
+    --brown: #5c3d2e;
+    --gold: #c9973a;
+    --gold-light: #e8c97a;
+    --rust: #c05a2a;
+    --sage: #6b8c6e;
+    --muted: #8a7060;
+    --border: #e0d4c4;
+    --card-bg: #fffdf9;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    background: var(--cream);
+    color: var(--ink);
+    font-family: 'Noto Sans KR', sans-serif;
+    min-height: 100vh;
+    overflow-x: hidden;
+  }
+
+  .top-stripe {
+    height: 6px;
+    background: linear-gradient(90deg, var(--gold) 0%, var(--rust) 40%, var(--gold-light) 70%, var(--gold) 100%);
+  }
+
+  header {
+    background: var(--warm-white);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 24px 40px;
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+  }
+
+  header::before {
+    content: '';
+    position: absolute;
+    top: 0; left: 0; right: 0; bottom: 0;
+    background: radial-gradient(ellipse at 50% 0%, rgba(201,151,58,0.08) 0%, transparent 70%);
+    pointer-events: none;
+  }
+
+  .header-label {
+    font-family: 'DM Serif Display', serif;
+    font-size: 11px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 12px;
+    display: block;
+  }
+
+  header h1 {
+    font-family: 'Noto Serif KR', serif;
+    font-size: clamp(24px, 5vw, 42px);
+    font-weight: 700;
+    color: var(--brown);
+    line-height: 1.2;
+    margin-bottom: 8px;
+  }
+
+  .header-sub {
+    font-size: 14px;
+    color: var(--muted);
+    font-weight: 300;
+    letter-spacing: 0.05em;
+  }
+
+  .header-dates {
+    display: inline-flex;
+    align-items: center;
+    gap: 12px;
+    margin-top: 20px;
+    padding: 10px 24px;
+    border: 1px solid var(--gold);
+    border-radius: 2px;
+    font-size: 13px;
+    color: var(--brown);
+    font-weight: 500;
+    letter-spacing: 0.1em;
+  }
+
+  .header-dates .dot { color: var(--gold); font-size: 18px; }
+
+  .flight-banner {
+    background: var(--brown);
+    color: var(--cream);
+    display: flex;
+    justify-content: center;
+    gap: 32px;
+    flex-wrap: wrap;
+    padding: 14px 24px;
+    font-size: 12px;
+    letter-spacing: 0.08em;
+  }
+
+  .flight-item { display: flex; align-items: center; gap: 8px; }
+  .flight-item .label { opacity: 0.6; }
+  .flight-item .value { font-weight: 500; color: var(--gold-light); }
+
+  main {
+    max-width: 860px;
+    margin: 0 auto;
+    padding: 40px 20px 80px;
+  }
+
+  .day-card {
+    background: var(--card-bg);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    margin-bottom: 20px;
+    overflow: hidden;
+    transition: box-shadow 0.2s ease;
+    animation: fadeUp 0.4s ease both;
+  }
+
+  .day-card:hover { box-shadow: 0 4px 24px rgba(92,61,46,0.08); }
+
+  @keyframes fadeUp {
+    from { opacity: 0; transform: translateY(16px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .day-card:nth-child(1)  { animation-delay: 0.05s; }
+  .day-card:nth-child(2)  { animation-delay: 0.10s; }
+  .day-card:nth-child(3)  { animation-delay: 0.15s; }
+  .day-card:nth-child(4)  { animation-delay: 0.20s; }
+  .day-card:nth-child(5)  { animation-delay: 0.25s; }
+  .day-card:nth-child(6)  { animation-delay: 0.30s; }
+  .day-card:nth-child(7)  { animation-delay: 0.35s; }
+  .day-card:nth-child(8)  { animation-delay: 0.40s; }
+  .day-card:nth-child(9)  { animation-delay: 0.45s; }
+  .day-card:nth-child(10) { animation-delay: 0.50s; }
+
+  .day-header {
+    display: flex;
+    align-items: stretch;
+    border-bottom: 1px solid var(--border);
+  }
+
+  .day-number {
+    background: var(--brown);
+    color: var(--cream);
+    padding: 16px 22px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    min-width: 80px;
+  }
+
+  .day-number .month { font-size: 10px; letter-spacing: 0.15em; opacity: 0.7; }
+  .day-number .date  { font-family: 'DM Serif Display', serif; font-size: 32px; line-height: 1; }
+  .day-number .dow   { font-size: 11px; margin-top: 2px; color: var(--gold-light); letter-spacing: 0.05em; }
+
+  .day-title-area {
+    padding: 16px 20px;
+    display: flex;
+    align-items: center;
+    flex: 1;
+    gap: 10px;
+    flex-wrap: wrap;
+  }
+
+  .day-title {
+    font-family: 'Noto Serif KR', serif;
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--brown);
+  }
+
+  .badge {
+    font-size: 10px;
+    letter-spacing: 0.08em;
+    padding: 3px 10px;
+    border-radius: 20px;
+    font-weight: 500;
+  }
+
+  .badge-arrival   { background: #e8f5e9; color: #2e7d32; }
+  .badge-departure { background: #fff3e0; color: #e65100; }
+  .badge-sunday    { background: #e8eaf6; color: #3949ab; }
+  .badge-farewell  { background: #fce4ec; color: #c2185b; }
+  .badge-travel    { background: #e0f7fa; color: #00838f; }
+
+  .schedule-body { padding: 16px 20px 20px; }
+
+  .time-block { margin-bottom: 14px; }
+  .time-block:last-child { margin-bottom: 0; }
+
+  .time-label {
+    display: inline-block;
+    font-size: 10px;
+    font-weight: 500;
+    color: var(--gold);
+    letter-spacing: 0.12em;
+    text-transform: uppercase;
+    margin-bottom: 4px;
+    border-bottom: 1px solid var(--gold-light);
+    padding-bottom: 1px;
+  }
+
+  .items-list { list-style: none; }
+
+  .items-list li {
+    display: flex;
+    align-items: flex-start;
+    gap: 10px;
+    padding: 6px 0;
+    border-bottom: 1px dotted var(--border);
+    font-size: 13.5px;
+    color: var(--ink);
+    line-height: 1.5;
+  }
+
+  .items-list li:last-child { border-bottom: none; }
+
+  .item-icon {
+    width: 22px;
+    height: 22px;
+    min-width: 22px;
+    border-radius: 50%;
+    background: var(--cream);
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 11px;
+    margin-top: 1px;
+  }
+
+  .item-time {
+    font-size: 12px;
+    font-weight: 500;
+    color: var(--rust);
+    min-width: 42px;
+    padding-top: 2px;
+  }
+
+  .item-text { flex: 1; }
+
+  /* 동적 공지 배너 */
+  .notice-area { margin-top: 10px; }
+
+  .notice-pending {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #fff8e1;
+    border-left: 3px solid var(--gold);
+    padding: 7px 12px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: var(--brown);
+    border-radius: 0 2px 2px 0;
+  }
+
+  .notice-resolved {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    background: #e8f5e9;
+    border-left: 3px solid var(--sage);
+    padding: 7px 12px;
+    margin-bottom: 5px;
+    font-size: 12px;
+    color: #2e7d32;
+    border-radius: 0 2px 2px 0;
+  }
+
+  /* 매칭 섹션 */
+  .matching-section {
+    margin-top: 14px;
+    border-top: 1px dashed var(--border);
+    padding-top: 12px;
+    display: none;
+  }
+
+  .matching-title {
+    font-size: 10px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+    color: var(--sage);
+    font-weight: 500;
+    margin-bottom: 10px;
+  }
+
+  .matching-meal-group { margin-bottom: 10px; }
+  .matching-meal-group:last-child { margin-bottom: 0; }
+
+  .matching-meal-label {
+    font-size: 10px;
+    color: var(--muted);
+    letter-spacing: 0.1em;
+    text-transform: uppercase;
+    margin-bottom: 5px;
+    border-bottom: 1px solid var(--border);
+    padding-bottom: 3px;
+  }
+
+  .matching-pair {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 6px 10px;
+    background: var(--cream);
+    border-radius: 3px;
+    margin-bottom: 4px;
+    font-size: 13px;
+    flex-wrap: wrap;
+  }
+
+  .pair-nyp { color: var(--brown); font-weight: 500; }
+  .pair-arrow { color: var(--gold); font-size: 16px; }
+  .pair-host { color: var(--rust); font-weight: 500; }
+  .pair-note { color: var(--muted); font-size: 11px; }
+
+  /* 일정 메모 */
+  .day-note-area { margin-top: 10px; display: none; }
+
+  .day-note {
+    background: #f0f4ff;
+    border-left: 3px solid #7986cb;
+    padding: 8px 12px;
+    font-size: 12px;
+    color: #3949ab;
+    border-radius: 0 2px 2px 0;
+    white-space: pre-line;
+    line-height: 1.6;
+  }
+
+  /* 실시간 연결 상태 */
+  .live-badge {
+    position: fixed;
+    bottom: 20px;
+    right: 20px;
+    background: var(--sage);
+    color: white;
+    font-size: 11px;
+    padding: 6px 12px;
+    border-radius: 20px;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    opacity: 0.85;
+    z-index: 100;
+  }
+
+  .live-dot {
+    width: 7px;
+    height: 7px;
+    background: #a5d6a7;
+    border-radius: 50%;
+    animation: pulse 2s infinite;
+  }
+
+  @keyframes pulse {
+    0%, 100% { opacity: 1; }
+    50% { opacity: 0.3; }
+  }
+
+  .section-divider {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin: 32px 0 24px;
+    color: var(--muted);
+    font-size: 11px;
+    letter-spacing: 0.15em;
+    text-transform: uppercase;
+  }
+
+  .section-divider::before,
+  .section-divider::after {
+    content: '';
+    flex: 1;
+    height: 1px;
+    background: linear-gradient(90deg, transparent, var(--border), transparent);
+  }
+
+  footer {
+    text-align: center;
+    padding: 32px;
+    border-top: 1px solid var(--border);
+    color: var(--muted);
+    font-size: 12px;
+    letter-spacing: 0.05em;
+  }
+
+  footer .prayer { font-size: 18px; margin-bottom: 8px; }
+
+  @media (max-width: 540px) {
+    .day-number { min-width: 64px; padding: 14px 14px; }
+    .day-number .date { font-size: 26px; }
+    .flight-banner { gap: 16px; font-size: 11px; }
+  }
+</style>
+</head>
+<body>
+
+<div class="top-stripe"></div>
+
+<header>
+  <span class="header-label">Singapore NYP Korea Visit 2026</span>
+  <h1>싱가포르 NYP 방한 일정</h1>
+  <p class="header-sub">Nanyang Polytechnic · Korea Campus Mission</p>
+  <div class="header-dates">
+    <span>2026년 5월 21일</span>
+    <span class="dot">→</span>
+    <span>2026년 5월 30일</span>
+  </div>
+</header>
+
+<div class="flight-banner">
+  <div class="flight-item">
+    <span class="label">✈ 입국</span>
+    <span class="value">TW162 · 06:45 인천 T1</span>
+  </div>
+  <div class="flight-item">
+    <span class="label">픽업</span>
+    <span class="value">서한길, 이목자</span>
+  </div>
+  <div class="flight-item">
+    <span class="label">✈ 출국</span>
+    <span class="value">TW161 · 15:50 인천 T1</span>
+  </div>
+</div>
+
+<main>
+
+  <!-- 5/21 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">21</span>
+        <span class="dow">목요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">도착 및 환영</span>
+        <span class="badge badge-arrival">✈ 입국일</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">✈</span><span class="item-time">06:45</span><span class="item-text">인천 1터미널 입국 (TW162)<br><span style="font-size:12px;color:var(--muted)">픽업: 서한길, 이목자</span></span></li>
+        <li><span class="item-icon">🌿</span><span class="item-time">오전</span><span class="item-text">양화진 외국인 선교사 묘원</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">점심</span><span class="item-text">점심 식사</span></li>
+        <li><span class="item-icon">🛋</span><span class="item-time">오후</span><span class="item-text">휴식</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">저녁</span><span class="item-text">환영 식사 및 오리엔테이션</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0521"></div>
+      <div class="matching-section" data-match-area="0521">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0521">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/22 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">22</span>
+        <span class="dow">금요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">아주대 캠퍼스</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">🎓</span><span class="item-time">오전~오후</span><span class="item-text">아주대 일정 (캠퍼스 탐방 및 교제)</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">저녁</span><span class="item-text">서울 돌아와서 저녁식사 · 교제</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0522"></div>
+      <div class="matching-section" data-match-area="0522">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0522">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/23 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">23</span>
+        <span class="dow">토요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">직장인 수양회</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">🏸</span><span class="item-time">오전</span><span class="item-text">배드민턴 교제</span></li>
+        <li><span class="item-icon">🍱</span><span class="item-time">점심</span><span class="item-text">점심 교제</span></li>
+        <li><span class="item-icon">⛺</span><span class="item-time">오후~저녁</span><span class="item-text">불광동 팀비전센터 직장인 수양회</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0523"></div>
+      <div class="matching-section" data-match-area="0523">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0523">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/24 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">24</span>
+        <span class="dow">주일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">주일 모임</span>
+        <span class="badge badge-sunday">주일</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">👥</span><span class="item-time">오전</span><span class="item-text">그룹 교제</span></li>
+        <li><span class="item-icon">⛪</span><span class="item-time">오후</span><span class="item-text">주일 모임</span></li>
+        <li><span class="item-icon">🍱</span><span class="item-time">저녁</span><span class="item-text">생활관 저녁식사</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0524"></div>
+      <div class="matching-section" data-match-area="0524">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0524">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/25 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">25</span>
+        <span class="dow">월요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">한국외대 캠퍼스</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">🎓</span><span class="item-time">종일</span><span class="item-text">한국외대 일정</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0525"></div>
+      <div class="matching-section" data-match-area="0525">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0525">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider">광주 사역</div>
+
+  <!-- 5/26 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">26</span>
+        <span class="dow">화요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">광주 이동 · 사역</span>
+        <span class="badge badge-travel">SRT</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">🚄</span><span class="item-time">08:30</span><span class="item-text">수서역 출발 (SRT 605)<br><span style="font-size:12px;color:var(--muted)">동행 자매: 유헌주</span></span></li>
+        <li><span class="item-icon">📍</span><span class="item-time">10:29</span><span class="item-text">광주송정역 도착</span></li>
+        <li><span class="item-icon">🌏</span><span class="item-time">오후</span><span class="item-text">광주 사역 탐방 및 교제</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0526"></div>
+      <div class="matching-section" data-match-area="0526">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0526">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/27 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">27</span>
+        <span class="dow">수요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">서울 귀환 · 수요모임</span>
+        <span class="badge badge-travel">SRT</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">🚄</span><span class="item-time">13:43</span><span class="item-text">광주송정역 출발 (SRT 658)<br><span style="font-size:12px;color:var(--muted)">동행 자매: 유헌주</span></span></li>
+        <li><span class="item-icon">📍</span><span class="item-time">15:40</span><span class="item-text">수서역 도착</span></li>
+        <li><span class="item-icon">🛋</span><span class="item-time">오후</span><span class="item-text">휴식 및 수요모임 준비</span></li>
+        <li><span class="item-icon">⛪</span><span class="item-time">저녁</span><span class="item-text">수요모임 참석</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0527"></div>
+      <div class="matching-section" data-match-area="0527">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0527">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <div class="section-divider">마지막 일정</div>
+
+  <!-- 5/28 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">28</span>
+        <span class="dow">목요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">한양대 교제 · 쇼핑</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">📖</span><span class="item-time">오전</span><span class="item-text">베이직</span></li>
+        <li><span class="item-icon">📢</span><span class="item-time">점심</span><span class="item-text">전도</span></li>
+        <li><span class="item-icon">🍜</span><span class="item-time">점심 후</span><span class="item-text">한양대B 교제</span></li>
+        <li><span class="item-icon">🛍</span><span class="item-time">오후</span><span class="item-text">쇼핑</span></li>
+        <li><span class="item-icon">🏠</span><span class="item-time">저녁</span><span class="item-text">형제: 정환이형 가정 초대 (형제들 4명)<br><span style="font-size:12px;color:var(--muted)">자매: 송현희 자매님 가정 초대 (자매들 3명)</span></span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0528"></div>
+      <div class="matching-section" data-match-area="0528">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0528">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/29 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">29</span>
+        <span class="dow">금요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">전도 · Farewell</span>
+        <span class="badge badge-farewell">마지막 날</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">📝</span><span class="item-time">오전</span><span class="item-text">배운 내용 정리</span></li>
+        <li><span class="item-icon">🍱</span><span class="item-time">점심</span><span class="item-text">점심 교제</span></li>
+        <li><span class="item-icon">📢</span><span class="item-time">오후</span><span class="item-text">대학 축제 전도 합류</span></li>
+        <li><span class="item-icon">🎉</span><span class="item-time">저녁</span><span class="item-text">Farewell 모임</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0529"></div>
+      <div class="matching-section" data-match-area="0529">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0529">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- 5/30 -->
+  <div class="day-card">
+    <div class="day-header">
+      <div class="day-number">
+        <span class="month">MAY</span>
+        <span class="date">30</span>
+        <span class="dow">토요일</span>
+      </div>
+      <div class="day-title-area">
+        <span class="day-title">출국</span>
+        <span class="badge badge-departure">✈ 출국일</span>
+      </div>
+    </div>
+    <div class="schedule-body">
+      <ul class="items-list">
+        <li><span class="item-icon">🧳</span><span class="item-time">오전</span><span class="item-text">짐 정리</span></li>
+        <li><span class="item-icon">🍽</span><span class="item-time">11:30</span><span class="item-text">점심 교제 (11:30~12:30)</span></li>
+        <li><span class="item-icon">🚌</span><span class="item-time">12:30</span><span class="item-text">공항 출발</span></li>
+        <li><span class="item-icon">✈</span><span class="item-time">15:50</span><span class="item-text">인천 1터미널 출국 (TW161)</span></li>
+      </ul>
+      <div class="notice-area" data-notice-area="0530"></div>
+      <div class="matching-section" data-match-area="0530">
+        <div class="matching-title">교제 매칭</div>
+        <div class="matching-list"></div>
+      </div>
+      <div class="day-note-area" data-note-area="0530">
+        <div class="day-note"></div>
+      </div>
+    </div>
+  </div>
+
+</main>
+
+<footer>
+  <div class="prayer">🙏</div>
+  <p>싱가포르 NYP 방한팀과 함께하는 10일간의 여정</p>
+  <p style="margin-top:6px; color: var(--gold);">May 21 – May 30, 2026</p>
+</footer>
+
+<div class="live-badge">
+  <div class="live-dot"></div>
+  <span>실시간</span>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  const socket = io();
+
+  socket.on('data_update', (data) => {
+    renderNotices(data.notices);
+    renderMatchings(data.matchings);
+    renderDayNotes(data.day_notes);
+  });
+
+  function renderNotices(notices) {
+    document.querySelectorAll('[data-notice-area]').forEach(el => {
+      const key = el.dataset.noticeArea;
+      const items = notices.filter(n => n.date_key === key);
+      el.innerHTML = items.map(n => {
+        if (n.resolved) {
+          return `<div class="notice-resolved">✅ ${n.label}${n.resolved_text ? ' — ' + n.resolved_text : ''}</div>`;
+        }
+        return `<div class="notice-pending">🔔 ${n.label}</div>`;
+      }).join('');
+    });
+  }
+
+  function renderMatchings(matchings) {
+    document.querySelectorAll('[data-match-area]').forEach(section => {
+      const key = section.dataset.matchArea;
+      const items = matchings.filter(m => m.date_key === key);
+      const list = section.querySelector('.matching-list');
+
+      if (items.length === 0) {
+        section.style.display = 'none';
+        return;
+      }
+
+      section.style.display = 'block';
+
+      // 식사별 그룹핑
+      const byMeal = {};
+      items.forEach(m => {
+        if (!byMeal[m.meal]) byMeal[m.meal] = [];
+        byMeal[m.meal].push(m);
+      });
+
+      list.innerHTML = Object.entries(byMeal).map(([meal, pairs]) => `
+        <div class="matching-meal-group">
+          <div class="matching-meal-label">${meal}</div>
+          ${pairs.map(p => `
+            <div class="matching-pair">
+              <span class="pair-nyp">${p.nyp_name}</span>
+              <span class="pair-arrow">↔</span>
+              <span class="pair-host">${p.host_name}</span>
+              ${p.note ? `<span class="pair-note">(${p.note})</span>` : ''}
+            </div>
+          `).join('')}
+        </div>
+      `).join('');
+    });
+  }
+
+  function renderDayNotes(day_notes) {
+    document.querySelectorAll('[data-note-area]').forEach(area => {
+      const key = area.dataset.noteArea;
+      const data = day_notes.find(n => n.date_key === key);
+      const noteEl = area.querySelector('.day-note');
+      if (data && data.note && data.note.trim()) {
+        noteEl.textContent = data.note;
+        area.style.display = 'block';
+      } else {
+        area.style.display = 'none';
+      }
+    });
+  }
+</script>
+</body>
+</html>

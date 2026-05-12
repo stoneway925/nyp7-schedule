@@ -1,0 +1,794 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>NYP 일정 관리자</title>
+<link href="https://fonts.googleapis.com/css2?family=Noto+Sans+KR:wght@300;400;500;600&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --brown: #5c3d2e;
+    --gold: #c9973a;
+    --rust: #c05a2a;
+    --sage: #6b8c6e;
+    --cream: #faf6f0;
+    --border: #e0d4c4;
+    --muted: #8a7060;
+    --bg: #f5f0ea;
+  }
+
+  * { margin: 0; padding: 0; box-sizing: border-box; }
+
+  body {
+    font-family: 'Noto Sans KR', sans-serif;
+    background: var(--bg);
+    color: #1a1410;
+    min-height: 100vh;
+  }
+
+  /* 로그인 화면 */
+  #login-screen {
+    min-height: 100vh;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .login-box {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 8px;
+    padding: 40px;
+    width: 340px;
+    text-align: center;
+    box-shadow: 0 4px 24px rgba(92,61,46,0.08);
+  }
+
+  .login-box h2 {
+    font-size: 18px;
+    color: var(--brown);
+    margin-bottom: 8px;
+  }
+
+  .login-box p {
+    font-size: 13px;
+    color: var(--muted);
+    margin-bottom: 24px;
+  }
+
+  .login-box input {
+    width: 100%;
+    padding: 10px 14px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 14px;
+    margin-bottom: 12px;
+    font-family: inherit;
+  }
+
+  .login-box input:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  .btn-login {
+    width: 100%;
+    padding: 11px;
+    background: var(--brown);
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 14px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
+
+  .btn-login:hover { background: var(--rust); }
+
+  .login-error {
+    color: var(--rust);
+    font-size: 12px;
+    margin-top: 8px;
+    display: none;
+  }
+
+  /* 관리자 패널 */
+  #admin-panel { display: none; }
+
+  .top-bar {
+    background: var(--brown);
+    color: white;
+    padding: 14px 24px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+  }
+
+  .top-bar h1 { font-size: 15px; font-weight: 500; }
+
+  .btn-logout {
+    background: rgba(255,255,255,0.15);
+    border: 1px solid rgba(255,255,255,0.3);
+    color: white;
+    padding: 5px 14px;
+    border-radius: 4px;
+    font-size: 12px;
+    cursor: pointer;
+    font-family: inherit;
+  }
+
+  .tabs {
+    background: white;
+    border-bottom: 1px solid var(--border);
+    display: flex;
+    padding: 0 24px;
+    overflow-x: auto;
+  }
+
+  .tab {
+    padding: 14px 20px;
+    font-size: 13px;
+    color: var(--muted);
+    cursor: pointer;
+    border-bottom: 2px solid transparent;
+    white-space: nowrap;
+    transition: all 0.2s;
+  }
+
+  .tab.active {
+    color: var(--brown);
+    border-bottom-color: var(--gold);
+    font-weight: 500;
+  }
+
+  .tab-content {
+    max-width: 800px;
+    margin: 0 auto;
+    padding: 28px 20px 60px;
+    display: none;
+  }
+
+  .tab-content.active { display: block; }
+
+  /* 섹션 */
+  .section-title {
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--brown);
+    margin-bottom: 14px;
+    padding-bottom: 8px;
+    border-bottom: 1px solid var(--border);
+  }
+
+  /* 폼 */
+  .form-card {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 6px;
+    padding: 20px;
+    margin-bottom: 20px;
+  }
+
+  .form-row {
+    display: grid;
+    gap: 10px;
+    margin-bottom: 12px;
+  }
+
+  .form-row.cols-2 { grid-template-columns: 1fr 1fr; }
+  .form-row.cols-3 { grid-template-columns: 1fr 1fr 1fr; }
+
+  label {
+    display: block;
+    font-size: 11px;
+    color: var(--muted);
+    margin-bottom: 4px;
+    letter-spacing: 0.05em;
+  }
+
+  input[type="text"], select, textarea {
+    width: 100%;
+    padding: 9px 12px;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: inherit;
+    background: white;
+    color: #1a1410;
+    transition: border-color 0.2s;
+  }
+
+  input[type="text"]:focus, select:focus, textarea:focus {
+    outline: none;
+    border-color: var(--gold);
+  }
+
+  textarea { resize: vertical; min-height: 72px; line-height: 1.5; }
+
+  .btn {
+    padding: 9px 18px;
+    border: none;
+    border-radius: 4px;
+    font-size: 13px;
+    font-family: inherit;
+    cursor: pointer;
+    transition: all 0.2s;
+  }
+
+  .btn-primary { background: var(--brown); color: white; }
+  .btn-primary:hover { background: var(--rust); }
+  .btn-danger { background: #fff0f0; color: #c62828; border: 1px solid #ffcdd2; }
+  .btn-danger:hover { background: #ffcdd2; }
+  .btn-success { background: #e8f5e9; color: #2e7d32; border: 1px solid #c8e6c9; }
+  .btn-success:hover { background: #c8e6c9; }
+  .btn-sm { padding: 5px 12px; font-size: 12px; }
+
+  /* 리스트 아이템 */
+  .list-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 12px 16px;
+    margin-bottom: 8px;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+  }
+
+  .list-item-info { flex: 1; }
+  .list-item-title { font-size: 13px; font-weight: 500; color: #1a1410; }
+  .list-item-sub { font-size: 11px; color: var(--muted); margin-top: 2px; }
+
+  /* 공지 아이템 */
+  .notice-item {
+    background: white;
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    padding: 14px 16px;
+    margin-bottom: 10px;
+  }
+
+  .notice-item-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    flex-wrap: wrap;
+  }
+
+  .notice-date { font-size: 11px; color: var(--muted); }
+  .notice-label { font-size: 13px; font-weight: 500; }
+
+  .badge-pending {
+    font-size: 11px;
+    padding: 2px 10px;
+    background: #fff8e1;
+    color: #f57f17;
+    border-radius: 20px;
+    border: 1px solid #ffe082;
+  }
+
+  .badge-done {
+    font-size: 11px;
+    padding: 2px 10px;
+    background: #e8f5e9;
+    color: #2e7d32;
+    border-radius: 20px;
+    border: 1px solid #c8e6c9;
+  }
+
+  .notice-resolve-form {
+    margin-top: 12px;
+    display: none;
+    gap: 8px;
+    align-items: flex-start;
+  }
+
+  .notice-resolve-form.open { display: flex; }
+
+  .notice-resolved-text {
+    font-size: 12px;
+    color: #2e7d32;
+    margin-top: 6px;
+    padding: 6px 10px;
+    background: #f1f8e9;
+    border-radius: 3px;
+  }
+
+  .empty-state {
+    text-align: center;
+    color: var(--muted);
+    font-size: 13px;
+    padding: 32px;
+  }
+
+  .gender-tag {
+    font-size: 11px;
+    padding: 2px 8px;
+    border-radius: 10px;
+  }
+
+  .gender-m { background: #e3f2fd; color: #1565c0; }
+  .gender-f { background: #fce4ec; color: #c2185b; }
+
+  .status-bar {
+    font-size: 12px;
+    color: var(--sage);
+    text-align: right;
+    margin-bottom: 8px;
+  }
+</style>
+</head>
+<body>
+
+<!-- 로그인 -->
+<div id="login-screen">
+  <div class="login-box">
+    <h2>NYP 일정 관리자</h2>
+    <p>관리자 비밀번호를 입력하세요</p>
+    <input type="password" id="pw-input" placeholder="비밀번호" />
+    <button class="btn-login" onclick="login()">로그인</button>
+    <div class="login-error" id="login-error">비밀번호가 틀렸습니다</div>
+  </div>
+</div>
+
+<!-- 관리자 패널 -->
+<div id="admin-panel">
+  <div class="top-bar">
+    <h1>NYP 방한 일정 관리자</h1>
+    <button class="btn-logout" onclick="logout()">로그아웃</button>
+  </div>
+
+  <div class="tabs">
+    <div class="tab active" onclick="switchTab('matching')">교제 매칭</div>
+    <div class="tab" onclick="switchTab('notices')">공지 관리</div>
+    <div class="tab" onclick="switchTab('hosts')">교제자 관리</div>
+    <div class="tab" onclick="switchTab('notes')">일정 메모</div>
+  </div>
+
+  <!-- 탭 1: 매칭 -->
+  <div id="tab-matching" class="tab-content active">
+    <div class="form-card">
+      <div class="section-title">새 매칭 추가</div>
+      <div class="form-row cols-3">
+        <div>
+          <label>날짜</label>
+          <select id="m-date">
+            <option value="0521">5/21 (목) 도착</option>
+            <option value="0522">5/22 (금) 아주대</option>
+            <option value="0523">5/23 (토) 수양회</option>
+            <option value="0524">5/24 (주일)</option>
+            <option value="0525">5/25 (월) 한국외대</option>
+            <option value="0526">5/26 (화) 광주</option>
+            <option value="0527">5/27 (수) 수요모임</option>
+            <option value="0528">5/28 (목) 한양대</option>
+            <option value="0529">5/29 (금) Farewell</option>
+            <option value="0530">5/30 (토) 출국</option>
+          </select>
+        </div>
+        <div>
+          <label>식사/시간대</label>
+          <select id="m-meal">
+            <option value="점심">점심</option>
+            <option value="저녁">저녁</option>
+            <option value="아침">아침</option>
+            <option value="오후">오후</option>
+            <option value="기타">기타</option>
+          </select>
+        </div>
+        <div>
+          <label>NYP 팀원</label>
+          <select id="m-nyp">
+            <optgroup label="형제">
+              <option>Png Jian An</option>
+              <option>Ian Lim</option>
+              <option>Joel Kok</option>
+              <option>Glendon Mok</option>
+            </optgroup>
+            <optgroup label="자매">
+              <option>Tiffany Tang</option>
+              <option>Tricia Lee</option>
+              <option>Alicia Lee</option>
+            </optgroup>
+          </select>
+        </div>
+      </div>
+      <div class="form-row cols-2">
+        <div>
+          <label>한국 교제자</label>
+          <select id="m-host">
+            <option value="">-- 교제자 선택 --</option>
+          </select>
+        </div>
+        <div>
+          <label>메모 (선택)</label>
+          <input type="text" id="m-note" placeholder="예: 카페에서 만남" />
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addMatching()">매칭 추가</button>
+    </div>
+
+    <div class="section-title">현재 매칭 목록</div>
+    <div id="matching-list"><div class="empty-state">아직 매칭이 없습니다</div></div>
+  </div>
+
+  <!-- 탭 2: 공지 -->
+  <div id="tab-notices" class="tab-content">
+    <div class="section-title">공지 항목 (미확정 사항)</div>
+    <div id="notices-list"><div class="empty-state">불러오는 중...</div></div>
+  </div>
+
+  <!-- 탭 3: 교제자 관리 -->
+  <div id="tab-hosts" class="tab-content">
+    <div class="form-card">
+      <div class="section-title">한국 교제자 추가</div>
+      <div class="form-row cols-3">
+        <div>
+          <label>이름</label>
+          <input type="text" id="h-name" placeholder="이름" />
+        </div>
+        <div>
+          <label>성별</label>
+          <select id="h-gender">
+            <option value="형제">형제</option>
+            <option value="자매">자매</option>
+          </select>
+        </div>
+        <div>
+          <label>메모 (선택)</label>
+          <input type="text" id="h-note" placeholder="예: 아주대 3학년" />
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="addHost()">추가</button>
+    </div>
+
+    <div class="section-title">교제자 목록</div>
+    <div id="hosts-list"><div class="empty-state">등록된 교제자가 없습니다</div></div>
+  </div>
+
+  <!-- 탭 4: 일정 메모 -->
+  <div id="tab-notes" class="tab-content">
+    <div class="form-card">
+      <div class="section-title">날짜별 메모 추가/수정</div>
+      <div class="form-row">
+        <div>
+          <label>날짜 선택</label>
+          <select id="n-date">
+            <option value="0521">5/21 (목) 도착</option>
+            <option value="0522">5/22 (금) 아주대</option>
+            <option value="0523">5/23 (토) 수양회</option>
+            <option value="0524">5/24 (주일)</option>
+            <option value="0525">5/25 (월) 한국외대</option>
+            <option value="0526">5/26 (화) 광주</option>
+            <option value="0527">5/27 (수) 수요모임</option>
+            <option value="0528">5/28 (목) 한양대</option>
+            <option value="0529">5/29 (금) Farewell</option>
+            <option value="0530">5/30 (토) 출국</option>
+          </select>
+        </div>
+      </div>
+      <div class="form-row">
+        <div>
+          <label>메모 내용</label>
+          <textarea id="n-note" placeholder="일정에 표시할 추가 정보를 입력하세요&#10;예: 모임 장소 변경 — OO 카페로"></textarea>
+        </div>
+      </div>
+      <button class="btn btn-primary" onclick="saveNote()">저장</button>
+      <span id="note-saved" style="font-size:12px; color:var(--sage); margin-left:12px; display:none">저장됨</span>
+    </div>
+
+    <div class="section-title">현재 메모 목록</div>
+    <div id="notes-list"><div class="empty-state">저장된 메모가 없습니다</div></div>
+  </div>
+</div>
+
+<script src="/socket.io/socket.io.js"></script>
+<script>
+  let adminPw = '';
+  let appData = { notices: [], matchings: [], hosts: [], day_notes: [] };
+
+  const socket = io();
+  socket.on('data_update', (data) => {
+    appData = data;
+    renderAll();
+  });
+
+  // 로그인
+  document.getElementById('pw-input').addEventListener('keydown', e => {
+    if (e.key === 'Enter') login();
+  });
+
+  async function login() {
+    const pw = document.getElementById('pw-input').value;
+    const res = await fetch('/api/admin/auth', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({ password: pw })
+    });
+    if (res.ok) {
+      adminPw = pw;
+      document.getElementById('login-screen').style.display = 'none';
+      document.getElementById('admin-panel').style.display = 'block';
+    } else {
+      document.getElementById('login-error').style.display = 'block';
+    }
+  }
+
+  function logout() {
+    adminPw = '';
+    document.getElementById('login-screen').style.display = 'flex';
+    document.getElementById('admin-panel').style.display = 'none';
+    document.getElementById('pw-input').value = '';
+  }
+
+  // 탭 전환
+  function switchTab(name) {
+    document.querySelectorAll('.tab').forEach((t, i) => {
+      const names = ['matching', 'notices', 'hosts', 'notes'];
+      t.classList.toggle('active', names[i] === name);
+    });
+    document.querySelectorAll('.tab-content').forEach(c => c.classList.remove('active'));
+    document.getElementById('tab-' + name).classList.add('active');
+  }
+
+  // 전체 렌더링
+  function renderAll() {
+    renderMatchings();
+    renderNotices();
+    renderHosts();
+    renderNotes();
+    updateHostSelect();
+  }
+
+  // 교제자 select 업데이트
+  function updateHostSelect() {
+    const sel = document.getElementById('m-host');
+    const current = sel.value;
+    sel.innerHTML = '<option value="">-- 교제자 선택 --</option>';
+    const brothers = appData.hosts.filter(h => h.gender === '형제');
+    const sisters = appData.hosts.filter(h => h.gender === '자매');
+    if (brothers.length) {
+      const g = document.createElement('optgroup');
+      g.label = '형제';
+      brothers.forEach(h => {
+        const o = document.createElement('option');
+        o.value = h.name;
+        o.textContent = h.name + (h.note ? ` (${h.note})` : '');
+        g.appendChild(o);
+      });
+      sel.appendChild(g);
+    }
+    if (sisters.length) {
+      const g = document.createElement('optgroup');
+      g.label = '자매';
+      sisters.forEach(h => {
+        const o = document.createElement('option');
+        o.value = h.name;
+        o.textContent = h.name + (h.note ? ` (${h.note})` : '');
+        g.appendChild(o);
+      });
+      sel.appendChild(g);
+    }
+    sel.value = current;
+  }
+
+  // 매칭 목록 렌더링
+  function renderMatchings() {
+    const el = document.getElementById('matching-list');
+    if (appData.matchings.length === 0) {
+      el.innerHTML = '<div class="empty-state">아직 매칭이 없습니다</div>';
+      return;
+    }
+
+    const dateLabels = {
+      '0521':'5/21 (목)','0522':'5/22 (금)','0523':'5/23 (토)',
+      '0524':'5/24 (주일)','0525':'5/25 (월)','0526':'5/26 (화)',
+      '0527':'5/27 (수)','0528':'5/28 (목)','0529':'5/29 (금)','0530':'5/30 (토)'
+    };
+
+    // 날짜별 그룹
+    const byDate = {};
+    appData.matchings.forEach(m => {
+      if (!byDate[m.date_key]) byDate[m.date_key] = {};
+      if (!byDate[m.date_key][m.meal]) byDate[m.date_key][m.meal] = [];
+      byDate[m.date_key][m.meal].push(m);
+    });
+
+    el.innerHTML = Object.entries(byDate).sort().map(([date, meals]) => `
+      <div style="margin-bottom:16px">
+        <div style="font-size:11px;letter-spacing:0.1em;color:var(--muted);text-transform:uppercase;margin-bottom:6px">
+          ${dateLabels[date] || date}
+        </div>
+        ${Object.entries(meals).map(([meal, pairs]) => `
+          <div style="margin-bottom:6px">
+            <div style="font-size:11px;color:var(--gold);margin-bottom:4px">${meal}</div>
+            ${pairs.map(p => `
+              <div class="list-item">
+                <div class="list-item-info">
+                  <div class="list-item-title">${p.nyp_name} ↔ ${p.host_name}</div>
+                  ${p.note ? `<div class="list-item-sub">${p.note}</div>` : ''}
+                </div>
+                <button class="btn btn-danger btn-sm" onclick="deleteMatching(${p.id})">삭제</button>
+              </div>
+            `).join('')}
+          </div>
+        `).join('')}
+      </div>
+    `).join('');
+  }
+
+  // 공지 렌더링
+  function renderNotices() {
+    const el = document.getElementById('notices-list');
+    if (appData.notices.length === 0) {
+      el.innerHTML = '<div class="empty-state">공지 항목이 없습니다</div>';
+      return;
+    }
+    el.innerHTML = appData.notices.map(n => `
+      <div class="notice-item">
+        <div class="notice-item-header">
+          <div>
+            <div class="notice-date">${n.date_label}</div>
+            <div class="notice-label">${n.label}</div>
+          </div>
+          <div style="display:flex;align-items:center;gap:8px">
+            <span class="${n.resolved ? 'badge-done' : 'badge-pending'}">${n.resolved ? '완료' : '미확정'}</span>
+            <button class="btn btn-sm ${n.resolved ? 'btn-danger' : 'btn-success'}"
+              onclick="toggleResolveForm(${n.id}, ${n.resolved})">
+              ${n.resolved ? '취소' : '완료 처리'}
+            </button>
+          </div>
+        </div>
+        ${n.resolved && n.resolved_text ? `<div class="notice-resolved-text">✅ ${n.resolved_text}</div>` : ''}
+        <div class="notice-resolve-form" id="resolve-form-${n.id}">
+          <input type="text" id="resolve-text-${n.id}" placeholder="완료 내용 입력 (예: 홍대 OO 식당으로 확정)"
+            style="flex:1" onkeydown="if(event.key==='Enter') resolveNotice(${n.id}, true)" />
+          <button class="btn btn-success btn-sm" onclick="resolveNotice(${n.id}, true)">확인</button>
+        </div>
+      </div>
+    `).join('');
+  }
+
+  function toggleResolveForm(id, isResolved) {
+    if (isResolved) {
+      resolveNotice(id, false);
+    } else {
+      const form = document.getElementById('resolve-form-' + id);
+      form.classList.toggle('open');
+      if (form.classList.contains('open')) {
+        document.getElementById('resolve-text-' + id).focus();
+      }
+    }
+  }
+
+  async function resolveNotice(id, resolved) {
+    const textEl = document.getElementById('resolve-text-' + id);
+    await fetch(`/api/admin/notice/${id}`, {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: adminPw,
+        resolved,
+        resolved_text: resolved ? (textEl ? textEl.value : '') : null
+      })
+    });
+  }
+
+  // 교제자 목록 렌더링
+  function renderHosts() {
+    const el = document.getElementById('hosts-list');
+    if (appData.hosts.length === 0) {
+      el.innerHTML = '<div class="empty-state">등록된 교제자가 없습니다</div>';
+      return;
+    }
+    el.innerHTML = appData.hosts.map(h => `
+      <div class="list-item">
+        <span class="gender-tag ${h.gender === '형제' ? 'gender-m' : 'gender-f'}">${h.gender}</span>
+        <div class="list-item-info">
+          <div class="list-item-title">${h.name}</div>
+          ${h.note ? `<div class="list-item-sub">${h.note}</div>` : ''}
+        </div>
+        <button class="btn btn-danger btn-sm" onclick="deleteHost(${h.id})">삭제</button>
+      </div>
+    `).join('');
+  }
+
+  // 메모 목록 렌더링
+  function renderNotes() {
+    const el = document.getElementById('notes-list');
+    const dateLabels = {
+      '0521':'5/21 (목)','0522':'5/22 (금)','0523':'5/23 (토)',
+      '0524':'5/24 (주일)','0525':'5/25 (월)','0526':'5/26 (화)',
+      '0527':'5/27 (수)','0528':'5/28 (목)','0529':'5/29 (금)','0530':'5/30 (토)'
+    };
+    const notes = appData.day_notes.filter(n => n.note && n.note.trim());
+    if (notes.length === 0) {
+      el.innerHTML = '<div class="empty-state">저장된 메모가 없습니다</div>';
+      return;
+    }
+    el.innerHTML = notes.map(n => `
+      <div class="list-item">
+        <div class="list-item-info">
+          <div class="list-item-sub">${dateLabels[n.date_key] || n.date_key}</div>
+          <div class="list-item-title" style="white-space:pre-line;margin-top:4px">${n.note}</div>
+        </div>
+        <button class="btn btn-sm" style="background:#f5f5f5" onclick="loadNoteToEdit('${n.date_key}', ${JSON.stringify(n.note)})">수정</button>
+      </div>
+    `).join('');
+  }
+
+  function loadNoteToEdit(dateKey, note) {
+    document.getElementById('n-date').value = dateKey;
+    document.getElementById('n-note').value = note;
+    switchTab('notes');
+    document.getElementById('n-note').focus();
+  }
+
+  // API 함수들
+  async function addMatching() {
+    const host = document.getElementById('m-host').value;
+    if (!host) { alert('교제자를 선택하세요'); return; }
+    await fetch('/api/admin/matching', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: adminPw,
+        date_key: document.getElementById('m-date').value,
+        meal: document.getElementById('m-meal').value,
+        nyp_name: document.getElementById('m-nyp').value,
+        host_name: host,
+        note: document.getElementById('m-note').value
+      })
+    });
+    document.getElementById('m-note').value = '';
+  }
+
+  async function deleteMatching(id) {
+    if (!confirm('이 매칭을 삭제할까요?')) return;
+    await fetch(`/api/admin/matching/${id}?password=${encodeURIComponent(adminPw)}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async function addHost() {
+    const name = document.getElementById('h-name').value.trim();
+    if (!name) { alert('이름을 입력하세요'); return; }
+    await fetch('/api/admin/host', {
+      method: 'POST',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: adminPw,
+        name,
+        gender: document.getElementById('h-gender').value,
+        note: document.getElementById('h-note').value
+      })
+    });
+    document.getElementById('h-name').value = '';
+    document.getElementById('h-note').value = '';
+  }
+
+  async function deleteHost(id) {
+    if (!confirm('이 교제자를 삭제할까요?')) return;
+    await fetch(`/api/admin/host/${id}?password=${encodeURIComponent(adminPw)}`, {
+      method: 'DELETE'
+    });
+  }
+
+  async function saveNote() {
+    await fetch('/api/admin/day-note', {
+      method: 'PUT',
+      headers: { 'Content-Type': 'application/json' },
+      body: JSON.stringify({
+        password: adminPw,
+        date_key: document.getElementById('n-date').value,
+        note: document.getElementById('n-note').value
+      })
+    });
+    const saved = document.getElementById('note-saved');
+    saved.style.display = 'inline';
+    setTimeout(() => saved.style.display = 'none', 2000);
+  }
+</script>
+</body>
+</html>

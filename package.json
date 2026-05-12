@@ -1,0 +1,15 @@
+{
+  "name": "nyp-schedule",
+  "version": "1.0.0",
+  "description": "싱가포르 NYP 방한 일정 웹앱",
+  "main": "server.js",
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "socket.io": "^4.7.2",
+    "better-sqlite3": "^9.4.3"
+  }
+}
